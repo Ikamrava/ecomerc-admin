@@ -7,8 +7,9 @@ import mongoose from 'mongoose';
 
 export default async function handler(req, res) {
     const {method } =req;
-    const {name,description,price} = req.body;
-    console.log( req.body)
+    const {name,description,price,images,category} = req.body;
+    console.log(req.body)
+ 
     
     await mongoose.connect(process.env.MONGODB_URI)
 
@@ -21,13 +22,18 @@ export default async function handler(req, res) {
             type: String,
             required: true,
           },
+    
           price: {
             type: Number,
             required: true,
           },
-          pop: {
+          images: [{
             type: String,
             required: false,
+          }],
+          category: {
+            type: String,
+            required: true,
           },
       });
 
@@ -36,8 +42,8 @@ export default async function handler(req, res) {
       
 
     if(method === 'POST'){
-        const pop = "pop"
-        await Product.create({ name,description,price,pop});
+        
+        await Product.create({ name:name,description:description,price:price,images:images,category:category});
         
         res.status(200).json("The product has been added")
 
@@ -55,7 +61,7 @@ export default async function handler(req, res) {
 
    }if(method === 'PUT'){
     const {name,description,price,_id,images} = req.body;
-       res.status(200).json(await Product.updateOne({_id},{name,description,price,_id,images}))
+       res.status(200).json(await Product.updateOne({_id},{name,description,price,_id,images,category}))
    }
 }
 
