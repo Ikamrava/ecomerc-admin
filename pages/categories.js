@@ -178,7 +178,7 @@ const  showConfirmation = (_id) => {
                 <tbody>
                   <tr>
                     <td className='p-1 border-2 border-black' >{item.category}</td>
-                    <td className='p-1 border-2 border-black text-center cursor-pointer' onClick={()=>updateHandler(item)}>Edit</td>
+                    <td className='px-2 border-2 border-black text-center cursor-pointer text-lime-800' onClick={()=>updateHandler(item)}>Edit</td>
                     <td className='p-1 border-2 border-black text-red-700 text-center cursor-pointer' onClick={()=>showConfirmation(item._id)}>Delete</td>
                     </tr>
                 </tbody>
